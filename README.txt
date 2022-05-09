@@ -32,4 +32,17 @@ Accessing the Web GUI
     - pip3 install opencv-python
     - pip3 install pillow
 
-2) 
+2) Download GitHub files into a folder such as c:\temp
+3) Open terminal of the environment 
+4) cd into c:\temp\mysite
+5) Start up the web application:
+        
+        python manage.py runserver
+
+6) Open browser: http://localhost:8000/loadtarget/admin/
+
+
+To start streaming videos and tracking:
+---------------------------------------
+1) 
+
