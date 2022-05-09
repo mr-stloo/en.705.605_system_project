@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+img { 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    padding: 5px; 
+    width: 150px; 
+} 
+
+img:hover { 
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); 
+} 
+
+.pageDiv { background-color: #ccc; } 
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.buttonRed {
+  background-color: #ff0202;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 15px #011c0f;
+     -moz-box-shadow: inset 0px 0px 15px #011c0f;
+          box-shadow: inset 0px 0px 15px #011c0f;
+   outline: none;
+}
+
+.buttonRed:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 15px #011c0f;
+     -moz-box-shadow: inset 0px 0px 15px #011c0f;
+          box-shadow: inset 0px 0px 15px #011c0f;
+   outline: none;
+}
+
+.button {
+  border: 0.2px solid black;
+}
+
+.buttonRed {
+  border: 0.2px solid black;
+}
+
+.button:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.buttonRed:hover {
+  background-color: #750101;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+}
+
+</style>
+</head>
+
+<header>
+  <h2>Advanced Surveillance System</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href="http://localhost:8000/loadtarget/load_new_target/">Enter New Target</a></li>
+      <li><a href="http://localhost:8000/loadtarget/view_target_list/">View Target List</a></li>
+      <li><a href="http://localhost:8000/loadtarget/admin/">Admin Page</a></li>
+      <li><a href="http://localhost:8000/loadtarget/dashboard/">Dashboard</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h2>Dashboard</h2>
+    <p>Data log below show the targets last seen location:</p>
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <div class="pageDiv">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Name</th>
+                    <th>Video</th>
+                    <th>Playback (s)</th>
+                    <th>Distance</th>
+                    <th>Mode</th>
+                    <th>Threshold</th>
+                </tr>
+                {% for target in targets %}
+                <tr> 
+                    <td style="text-align:center">{{target.date}}</td>
+                    <td style="text-align:center">{{target.time}}</td>
+                    <td style="text-align:center">{{target.location}}</td>
+                    <td style="text-align:center">{{ target.name}}</td>
+                    <td style="text-align:center">{{target.video}}</td>
+                    <td style="text-align:center">{{target.playback}}</td>                
+                    <td style="text-align:center">{{target.distance}}</td>                
+                    <td style="text-align:center">{{target.mode}}</td>                
+                    <td style="text-align:center">{{target.threshold}}</td>     
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br><br>    
+    </form>
+  </article>
+</section>
+</body>
+</html>

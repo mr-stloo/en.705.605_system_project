@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+img { 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    padding: 5px; 
+    width: 150px; 
+} 
+
+img:hover { 
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); 
+} 
+
+.pageDiv { background-color: #ccc; } 
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.buttonRed {
+  background-color: #ff0202;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 15px #011c0f;
+     -moz-box-shadow: inset 0px 0px 15px #011c0f;
+          box-shadow: inset 0px 0px 15px #011c0f;
+   outline: none;
+}
+
+.buttonRed:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 15px #011c0f;
+     -moz-box-shadow: inset 0px 0px 15px #011c0f;
+          box-shadow: inset 0px 0px 15px #011c0f;
+   outline: none;
+}
+
+.button {
+  border: 0.2px solid black;
+}
+
+.buttonRed {
+  border: 0.2px solid black;
+}
+
+.button:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.buttonRed:hover {
+  background-color: #750101;
+  color: white;
+}
+
+</style>
+</head>
+
+<header>
+  <h2>Advanced Surveillance System</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href="http://localhost:8000/loadtarget/load_new_target/">Enter New Target</a></li>
+      <li><a href="http://localhost:8000/loadtarget/view_target_list/">View Target List</a></li>
+      <li><a href="http://localhost:8000/loadtarget/admin/">Admin Page</a></li>
+      <li><a href="http://localhost:8000/loadtarget/dashboard/">Dashboard</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h2>Administration Page</h2>
+    
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <div class="pageDiv">
+            <table>
+                <tr>
+                    <td><b><label for="threshold_value">Similarity Threshold: </label></b></td>
+                    <td>
+                        <input type="range" id="threshold_value" name="threshold_value" value="{{threshold}}" min="0.1" max="1" step="0.1" oninput="this.nextElementSibling.value = this.value">
+                        <output>{{threshold}}</output><br><br>
+                    </td>
+                    <td>&nbsp&nbsp&nbsp&nbsp <b>Note:</b> Distance between target embeddings to input embeddings. Lower value increases false negatives; higher value increases false positives.</td>
+                    <td><button class="button" type="submit" value="config" name="config">UPDATE SETTINGS</button></td>
+                </tr>
+                <tr>
+                    <td><b>Select mode:</b></td>
+                    <td>
+                        <br><br>
+                        {% if mode %}
+                            <input type="radio" id="avg" name="comparison_mode" value="average">
+                            <label for="avg">Use average</label><br>
+                            <input type="radio" id="min" name="comparison_mode" value="minimum" checked>
+                            <label for="min">Use minimum</label><br><br>                  
+                        {% else %}
+                            <input type="radio" id="avg" name="comparison_mode" value="average" checked>
+                            <label for="avg">Use average</label><br>
+                            <input type="radio" id="min" name="comparison_mode" value="minimum">
+                            <label for="min">Use minimum</label><br><br>                  
+                        {% endif %}
+                    </td>
+                    <td>&nbsp&nbsp&nbsp&nbsp <b>Note:</b> <i>Use average</i> compute the distance between targets and input using all three images (embeddings);
+                        <i>Use minimum</i> picks the lowest distance of the three distances between targets and input to see if it is within <i>Similarity Threshold</i></td> 
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <br></b><p><b>Stop and restart tracking for settings to take effect.</b></p><br>
+        </div>
+        <br><br>
+        {% if is_start %}
+            <button class="buttonRed" type="submit" value="False" name="start">STOP TRACKING</button>
+        {% else %}
+            <button class="button" type="submit" value="True" name="start">START TRACKING</button>
+        {% endif %}
+        
+        <br><b><p> Please note, START and STOP button here does not work, have to run 'processor.py' per instructions to simulate tracking.</p></b>
+
+        
+
+    </form>
+  </article>
+</section>
+</body>
+</html>

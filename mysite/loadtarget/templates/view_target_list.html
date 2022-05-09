@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+img { 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    padding: 5px; 
+    width: 150px; 
+} 
+
+img:hover { 
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); 
+} 
+</style>
+</head>
+
+<header>
+  <h2>Advanced Surveillance System</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href="http://localhost:8000/loadtarget/load_new_target/">Enter New Target</a></li>
+      <li><a href="http://localhost:8000/loadtarget/view_target_list/">View Target List</a></li>
+      <li><a href="http://localhost:8000/loadtarget/admin/">Admin Page</a></li>
+      <li><a href="http://localhost:8000/loadtarget/dashboard/">Dashboard</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h2>Target List</h2>
+    <p>List of individuals in database. Click 'Delete' to remove record.</p>
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Pic 1</th>
+                <th>Pic 2</th>
+                <th>Pic 3</th>
+                <th>Delete?</th>
+            </tr>
+            {% for target in targets %}
+            <tr> 
+                <td>{{ target.name }}</td>
+                {% load static %}
+                <td><a target="_blank" href="{% static target.pic1 %}"><img src="{% static target.pic1 %}"></a></td>
+                <td><a target="_blank" href="{% static target.pic2 %}"><img src="{% static target.pic2 %}"></a></td>
+                <td><a target="_blank" href="{% static target.pic3 %}"><img src="{% static target.pic3 %}"></a></td>                
+                <td><button type="submit" value="{{ target.name }}" name="name">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+  </article>
+</section>
+</body>
+</html>
