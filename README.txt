@@ -25,7 +25,7 @@ Accessing the Web GUI (make sure MongoDB and Kafka are up first):
     - pip3 install pymongo
     - pip3 install sklearn
     - pip3 install keras==2.3 
-    - pip3 install tensorflow==2.2          <---------- must not install before Keras 2.3
+    - pip3 install tensorflow==2.2          <---------- DO NOT install before Keras 2.3
     - pip3 install django
     - pip3 install djongo
     - pip3 install numpy
@@ -57,6 +57,8 @@ To start streaming videos and tracking:
     
     OPTION 2 (without): python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false  
     
+    Check web GUI 'Dashboard' for update.
+    
     NOTES: 
     # more videos in C:\temp\track\input\videos
     # First argument  : Video input file to simulate live camera recording.
@@ -65,7 +67,7 @@ To start streaming videos and tracking:
     # Third argument  : Label for camera/location.
     # Fourth argument : 'false' means simulating without using Kafka messaging. I am struggling to get Kafka working as I desired, it does work though. 'true' means running using Kafka messaging.
     
- 3) Start processor.py (consumer)
+ 
  
  
 
