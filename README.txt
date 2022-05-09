@@ -1,3 +1,25 @@
+Instructions for setting up MongoDB server:
+1) docker pull mongo:latest
+2) docker run --name mongodb -d -p 27017:27017 mongo
+3) Create host directories:
+    mkdir C:\temp\nosql\mongo
+    mkdir C:\temp\nosql\mongo\import
+    mkdir C:\temp\nosql\mongo\data
+4) docker run --name mongodb -d -p 27017:27017 -v C:/temp/nosql/mongo/data:/data/db -v C:/temp/nosql/mongo/import:/import mongo
+
+
+Instructions for setting up Kafka server:
+1) Download docker-compose.yml from GitHub ----------MY LINK HERE------------------
+2) docker-compose up -d
+3) Command to test connections (in Windows):
+
+    test-netconnection localhost -port 29092
+    test-netconnection localhost -port 22181
+
+Accessing the Web GUI
+
+See Readme.txt.
+
 
 https://www.mongodb.com/compatibility/docker
 
