@@ -17,8 +17,8 @@ Instructions for setting up Kafka server:
     test-netconnection localhost -port 29092
     test-netconnection localhost -port 22181
 
-Accessing the Web GUI
----------------------
+Accessing the Web GUI (make sure MongoDB and Kafka are up first):
+-----------------------------------------------------------------
 1) Create an environment with following libraries:
     - Python 3.6
     - pip3 install kafka-python 
