@@ -44,13 +44,18 @@ Accessing the Web GUI
 
 To start streaming videos and tracking:
 ---------------------------------------
-1) cd into C:\temp\track
+1) Open another terminal of the environment.
 
-2) Start video streaming:
+2) cd into C:\temp\track
 
-    OPTION 1: python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false     
+3) Start video streaming:
+
+    OPTION 1 (using Kafka): 
+              python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" true     
+              
+              python processor.py
     
-    OPTION 2: python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" true  
+    OPTION 2 (without): python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false  
     
     NOTES: 
     # more videos in C:\temp\track\input\videos
