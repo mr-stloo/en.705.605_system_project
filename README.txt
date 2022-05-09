@@ -25,16 +25,16 @@ Accessing the Web GUI
     - pip3 install pymongo
     - pip3 install sklearn
     - pip3 install keras==2.3 
-    - pip3 install tensorflow==2.2
+    - pip3 install tensorflow==2.2          <---------- must not install before Keras 2.3
     - pip3 install django
     - pip3 install djongo
     - pip3 install numpy
     - pip3 install opencv-python
     - pip3 install pillow
 
-2) Download GitHub files into a folder such as c:\temp
+2) Download GitHub files into a folder c:\temp\track  <---------- create C:\temp\track if does not exists.
 3) Open terminal of the environment 
-4) cd into c:\temp\mysite
+4) cd into c:\temp\track\mysite
 5) Start up the web application:
         
         python manage.py runserver
@@ -44,5 +44,23 @@ Accessing the Web GUI
 
 To start streaming videos and tracking:
 ---------------------------------------
-1) 
+1) cd into C:\temp\track
+
+2) Start video streaming:
+
+    OPTION 1: python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false     
+    
+    OPTION 2: python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" true  
+    
+    NOTES: 
+    # more videos in C:\temp\track\input\videos
+    # First argument  : Video input file to simulate live camera recording.
+    # Second argument : Width and height size in pixel for facial size to be considered for embedding comparison. Smaller value means ignoring faces that are too small in images (or videos);
+    #                   Valid valid: 50 <= size <= 100.          
+    # Third argument  : Label for camera/location.
+    # Fourth argument : 'false' means simulating without using Kafka messaging. I am struggling to get Kafka working as I desired, it does work though. 'true' means running using Kafka messaging.
+    
+ 3) Start processor.py (consumer)
+ 
+ 
 
