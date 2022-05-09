@@ -31,6 +31,7 @@ Accessing the Web GUI (make sure MongoDB and Kafka are up first):
     - pip3 install numpy
     - pip3 install opencv-python
     - pip3 install pillow
+    - pip3 install mtcnn
 
 2) Download GitHub files into a folder c:\temp\track  <---------- create C:\temp\track if does not exists.
 3) Open terminal of the environment 
