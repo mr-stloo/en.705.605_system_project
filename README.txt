@@ -52,11 +52,14 @@ To start streaming videos and tracking:
 3) Start video streaming:
 
     OPTION 1 (using Kafka): 
+              
               python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" true     
               
-              python processor.py
+              python processor.py               (in new terminal)
     
-    OPTION 2 (without): python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false  
+    OPTION 2 (without): 
+    
+            python camera.py ".\\input\\videos\\The_Sound_of_Music_clip.mp4" 100 "Room 1" false  
     
     Check web GUI 'Dashboard' for update.
     
