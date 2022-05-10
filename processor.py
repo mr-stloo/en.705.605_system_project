@@ -69,13 +69,13 @@ def compare_embeddings(arr):
                          euclidean_distances([t[2]],[input_embedding]),
                          euclidean_distances([t[3]],[input_embedding]))
             if result[0][0] <= threshold:
-                print(arr)
-                print(arr["num"][0])
-                print(arr["num"][1])
-                print(arr["num"][2])
-                print(arr["num"][3])
-                print(arr["num"][4])
-                print(arr["num"][5])
+                #print(arr)
+                #print(arr["num"][0])
+                #print(arr["num"][1])
+                #print(arr["num"][2])
+                #print(arr["num"][3])
+                #print(arr["num"][4])
+                #print(arr["num"][5])
                 data = {"date": arr["num"][0], "time": arr["num"][1], "playback": arr["num"][2],
                  "location": arr["num"][3],"name": t[0],"video": arr["num"][5],
                  "mode":mode, "threshold":threshold, "distance":round(result[0][0],2)}
