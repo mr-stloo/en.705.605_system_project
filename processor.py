@@ -52,9 +52,9 @@ def load_embeddings():
 def compare_embeddings(arr):
     global mode
     global threshold
-    global target_embeddings
-    input_embedding = np.array(arr["num"][4])
+    global target_embeddings 
     try:
+        input_embedding = np.array(arr["num"][4])
         if mode == "average":
             for t in target_embeddings:            
                 result = euclidean_distances([t[4]],[input_embedding])
