@@ -22,8 +22,8 @@ from sklearn.metrics.pairwise import euclidean_distances
 from keras.models import load_model
 from cv2 import CascadeClassifier
 from PIL import Image
-from IPython.display import display # to display images
-from IPython.display import Video
+#from IPython.display import display # to display images
+#from IPython.display import Video
 from json import dumps  
 from kafka import KafkaProducer
 import pymongo
