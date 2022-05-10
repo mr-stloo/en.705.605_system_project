@@ -134,8 +134,8 @@ def load_embeddings():
 
 
 def send_message(msg):
-    my_data = {'num' : msg}                            
-    my_producer.send('testnum', value = my_data)
+    #my_data = {'num' : msg}                            
+    my_producer.send('testnum', value = msg)
 
 
 def main():
