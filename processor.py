@@ -54,33 +54,30 @@ def compare_embeddings(arr):
     global threshold
     global target_embeddings
     input_embedding = np.array(arr["num"][4])
-    if mode == "average":
-        for t in target_embeddings:            
-            result = euclidean_distances([t[4]],[input_embedding])
-            if result[0][0] <= threshold:           
-                data = {"date": arr["num"][0], "time": arr["num"][1], "playback": arr["num"][2],
-                 "location": arr["num"][3],"name": t[0],"video": arr["num"][5],
-                 "mode":mode, "threshold":threshold, "distance":round(result[0][0],2)}
-                log_table.insert_one(data)
-                print("Detected:", t[0], "; Distance=%.2f" % (result[0][0]))     
-    else:
-        for t in target_embeddings:            
-            result = min(euclidean_distances([t[1]],[input_embedding]),
-                         euclidean_distances([t[2]],[input_embedding]),
-                         euclidean_distances([t[3]],[input_embedding]))
-            if result[0][0] <= threshold:
-                #print(arr)
-                #print(arr["num"][0])
-                #print(arr["num"][1])
-                #print(arr["num"][2])
-                #print(arr["num"][3])
-                #print(arr["num"][4])
-                #print(arr["num"][5])
-                data = {"date": arr["num"][0], "time": arr["num"][1], "playback": arr["num"][2],
-                 "location": arr["num"][3],"name": t[0],"video": arr["num"][5],
-                 "mode":mode, "threshold":threshold, "distance":round(result[0][0],2)}
-                log_table.insert_one(data)                
-                print("Detected:", t[0], "; Distance=%.2f" % (result[0][0]))     
+    try:
+        if mode == "average":
+            for t in target_embeddings:            
+                result = euclidean_distances([t[4]],[input_embedding])
+                if result[0][0] <= threshold:           
+                    data = {"date": arr["num"][0], "time": arr["num"][1], "playback": arr["num"][2],
+                    "location": arr["num"][3],"name": t[0],"video": arr["num"][5],
+                    "mode":mode, "threshold":threshold, "distance":round(result[0][0],2)}
+                    log_table.insert_one(data)
+                    print("Detected:", t[0], "; Distance=%.2f" % (result[0][0]))        
+        else:
+            for t in target_embeddings:            
+                result = min(euclidean_distances([t[1]],[input_embedding]),
+                            euclidean_distances([t[2]],[input_embedding]),
+                            euclidean_distances([t[3]],[input_embedding]))
+                if result[0][0] <= threshold:
+                    data = {"date": arr["num"][0], "time": arr["num"][1], "playback": arr["num"][2],
+                    "location": arr["num"][3],"name": t[0],"video": arr["num"][5],
+                    "mode":mode, "threshold":threshold, "distance":round(result[0][0],2)}
+                    log_table.insert_one(data)                
+                    print("Detected:", t[0], "; Distance=%.2f" % (result[0][0]))     
+    except:
+        print("bad messages")
+
 
 
 # generating the Kafka Consumer  
